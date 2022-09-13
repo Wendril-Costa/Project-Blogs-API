@@ -16,6 +16,16 @@ const userService = {
 
         return { code: 200, users };
     },
+
+    findByPk: async (id) => {
+        const user = await User.findByPk(id, { attributes: { exclude: 'password' } });
+      
+        if (!user) {
+          return { code: 404, message: 'User does not exist' };
+        }
+      
+        return { code: 200, user };
+      },
 };
 
 module.exports = {

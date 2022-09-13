@@ -14,6 +14,7 @@ app.use(express.json());
 app.post('/login', loginController.login);
 app.post('/user', userMiddleware.userValid, userMiddleware.checkExist, userController.create);
 app.get('/user', jwtService.validateToken, userController.findAll);
+app.get('/user/:id', jwtService.validateToken, userController.findByPk);
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
 module.exports = app;

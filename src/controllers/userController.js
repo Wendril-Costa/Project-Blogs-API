@@ -21,11 +21,27 @@ const userController = {
             const { code, users } = await userService.findAll();
         
             return res.status(code).json(users);
-          } catch (error) {
+        } catch (error) {
             console.log(error.message);
         
             return res.status(500).json({ message: 'Erro Interno' });
-          }
+        }
+    },
+
+    findByPk: async (req, res) => {
+        const { id } = req.params;
+
+        try {
+          const { code, message, user } = await userService.findByPk(id); 
+      
+          if (message) return res.status(code).json({ message });
+      
+          return res.status(code).json(user);
+        } catch (error) {
+          console.log(error.message);
+      
+          return res.status(500).json({ message: 'Erro Interno' });
+        }
     },
 };
 
