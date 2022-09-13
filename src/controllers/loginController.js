@@ -11,8 +11,6 @@ const loginController = {
     
         return res.status(code).json({ token });
       } catch (error) {
-        console.log(error.message);
-    
         return res.status(500).json({ message: 'Erro Interno' });
       }
   },

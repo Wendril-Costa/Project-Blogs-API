@@ -10,6 +10,12 @@ const userService = {
 
         return { code: 201, token };
     },
+
+    findAll: async () => {
+        const users = await User.findAll({ attributes: { exclude: 'password' } });
+
+        return { code: 200, users };
+    },
 };
 
 module.exports = {
