@@ -14,6 +14,18 @@ const categoryController = {
           return res.status(500).json({ message: 'Erro Interno' });
         }
     },
+
+    findAll: async (_req, res) => {
+      try {
+          const { code, categories } = await categoryService.findAll();
+      
+          return res.status(code).json(categories);
+      } catch (error) {
+          console.log(error.message);
+      
+          return res.status(500).json({ message: 'Erro Interno' });
+      }
+  },
 };
 
 module.exports = {

@@ -10,6 +10,13 @@ const categoryService = {
       
         return { code: 201, category };
     },
+
+    findAll: async () => {
+        const categories = await Category.findAll();
+
+        return { code: 200, categories };
+    },
+
 };
 
 module.exports = {

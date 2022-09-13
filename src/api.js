@@ -17,6 +17,7 @@ app.post('/user', userMiddleware.userValid, userMiddleware.checkExist, userContr
 app.get('/user', jwtService.validateToken, userController.findAll);
 app.get('/user/:id', jwtService.validateToken, userController.findByPk);
 app.post('/categories', jwtService.validateToken, categoryController.create);
+app.get('/categories', jwtService.validateToken, categoryController.findAll);
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
 module.exports = app;
