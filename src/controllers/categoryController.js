@@ -21,8 +21,6 @@ const categoryController = {
       
           return res.status(code).json(categories);
       } catch (error) {
-          console.log(error.message);
-      
           return res.status(500).json({ message: 'Erro Interno' });
       }
   },

@@ -35,8 +35,24 @@ const postService = {
                 ],
             },
         );
-        
+
         return { code: 200, posts };
+    },
+
+    findOne: async (id) => {
+        const post = await BlogPost.findOne({ where: { id },
+            include: 
+                [
+                    { model: User, as: 'user', attributes: { exclude: ['password'] } },
+                    { model: Category, as: 'categories', through: { attributes: [] } },
+                ], 
+            });
+      
+        if (!post) {
+          return { code: 404, message: 'Post does not exist' };
+        }
+      
+        return { code: 200, post };
     },
 };
 
