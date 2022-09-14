@@ -16,6 +16,11 @@ const postController = {
         return res.status(500).json({ message: 'Erro Interno' });
     }
     },
+
+    findAll: async (req, res) => {
+        const { code, posts } = await postService.findAll();
+        return res.status(code).json(posts);
+    },
 };
 
 module.exports = {
