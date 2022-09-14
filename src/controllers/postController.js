@@ -1,6 +1,9 @@
 const { postService } = require('../services/postService');
 
+const erro = { message: 'Erro Interno' };
+
 const postController = {
+    // error: () => { 'Erro Interno'; },
     create: async (req, res) => {
         const { title, content, categoryIds } = req.body;
         const { id: userId } = req.user;
@@ -13,7 +16,7 @@ const postController = {
 
             return res.status(code).json(post);
         } catch (error) {
-            return res.status(500).json({ message: 'Erro Interno' });
+            return res.status(500).json(erro);
         }
     },
 
@@ -22,7 +25,7 @@ const postController = {
             const { code, posts } = await postService.findAll();
             return res.status(code).json(posts);
         } catch (error) {
-            return res.status(500).json({ message: 'Erro Interno' });
+            return res.status(500).json(erro);
         }
     },
 
@@ -36,7 +39,7 @@ const postController = {
 
             return res.status(code).json(post);
         } catch (error) {
-            return res.status(500).json({ message: 'Erro Interno' });
+            return res.status(500).json(erro);
         }
     },
 
@@ -52,7 +55,22 @@ const postController = {
 
             return res.status(code).json(update);
         } catch (error) {
-            return res.status(500).json({ message: 'Erro Interno' });
+            return res.status(500).json(erro);
+        }
+    },
+
+    delPost: async (req, res) => {
+        const { id } = req.params;
+        const { id: userId } = req.user;
+
+        try {
+            const { code, message } = await postService.delPost(id, userId);
+
+            if (message) return res.status(code).json({ message });
+        
+            return res.status(code).end();
+        } catch (error) {
+            return res.status(500).json(erro);
         }
     },
 };
