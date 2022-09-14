@@ -15,6 +15,7 @@ app.use(express.json());
 
 app.post('/login', loginController.login);
 app.post('/user', userMiddleware.userValid, userMiddleware.checkExist, userController.create);
+app.get('/post/search', jwtService.validateToken, postController.search);
 app.get('/user', jwtService.validateToken, userController.findAll);
 app.get('/user/:id', jwtService.validateToken, userController.findByPk);
 app.post('/categories', jwtService.validateToken, categoryController.create);
@@ -25,7 +26,6 @@ app.get('/post/:id', jwtService.validateToken, postController.findOne);
 app.put('/post/:id', jwtService.validateToken, postController.update);
 app.delete('/post/:id', jwtService.validateToken, postController.delPost);
 app.delete('/user/me', jwtService.validateToken, userController.delUser);
-// app.get('/post/search', jwtService.validateToken, postController.search);
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
 module.exports = app;

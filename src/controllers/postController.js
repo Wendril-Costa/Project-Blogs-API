@@ -74,17 +74,17 @@ const postController = {
         }
     },
 
-    // search: async (req, res) => {
-    //     const { q } = req.query;
-      
-    //     try {
-    //       const posts = await postService.search(q);
-      
-    //       return res.status(200).json(posts);
-    //     } catch (error) {
-    //       return res.status(500).json(erro);
-    //   }
-    // },
+    search: async (req, res) => {
+        const { q } = req.query;
+
+        try {
+            const { code, post } = await postService.search(q);
+    
+            return res.status(code).json(post);
+        } catch (error) {
+            return res.status(500).json(erro);
+        }
+      },
 };
 
 module.exports = {
