@@ -25,7 +25,7 @@ const userService = {
         }
       
         return { code: 200, user };
-      },
+    },
 };
 
 module.exports = {

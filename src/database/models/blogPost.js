@@ -15,12 +15,12 @@ module.exports = (sequelize, DataTypes) => {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-      published: DataTypes.STRING,
-      updated: DataTypes.STRING,
+      published: DataTypes.DATE,
+      updated: DataTypes.DATE,
     },
     {
-      timestamps: false,
-      tableName: "BlogPosts",
+      createdAt: 'published',
+      updatedAt: 'updated',
     }
   );
 
