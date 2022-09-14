@@ -1,6 +1,8 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
+const { User } = require('../database/models');
+
 const { JWT_SECRET } = process.env;
 
 const jwtService = {
@@ -13,14 +15,15 @@ const jwtService = {
         return token;
     },
 
-    validateToken: (req, res, next) => {
+    validateToken: async (req, res, next) => {
         const token = req.headers.authorization;
 
         if (!token) return res.status(401).json({ message: 'Token not found' });
 
         try {
-            const decode = jwt.verify(token, JWT_SECRET);
-            req.email = decode;
+            const { email } = jwt.verify(token, JWT_SECRET);
+            const { id } = await User.findOne({ where: { email } });
+            req.user = { id, email };
             next();
         } catch (error) {
             return res.status(401).json({ message: 'Expired or invalid token' });

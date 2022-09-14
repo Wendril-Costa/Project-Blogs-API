@@ -1,5 +1,8 @@
+const jwt = require('jsonwebtoken');
 const { User } = require('../database/models');
-const { jwtService } = require('./jwtService');
+// const { jwtService } = require('./jwtService');
+
+const { JWT_SECRET } = process.env;
 
 const loginService = {
   login: async ({ email, password }) => {
@@ -12,7 +15,11 @@ const loginService = {
       return { code: 400, message: 'Invalid fields' };
     }
 
-    const token = jwtService.generateToken(email);
+    const data = { email: user.dataValues.email };
+    const token = jwt.sign(data, JWT_SECRET, {
+    expiresIn: '7d',
+    algorithm: 'HS256',
+  });
 
     return { code: 200, token };
   },

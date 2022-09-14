@@ -22,6 +22,7 @@ app.get('/categories', jwtService.validateToken, categoryController.findAll);
 app.post('/post', jwtService.validateToken, postController.create);
 app.get('/post', jwtService.validateToken, postController.findAll);
 app.get('/post/:id', jwtService.validateToken, postController.findOne);
+app.put('/post/:id', jwtService.validateToken, postController.update);
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
 module.exports = app;

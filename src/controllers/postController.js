@@ -3,11 +3,11 @@ const { postService } = require('../services/postService');
 const postController = {
     create: async (req, res) => {
         const { title, content, categoryIds } = req.body;
-        // const { user } = req.email;
+        const { id: userId } = req.user;
 
         try {
             const { code, message, post } = await postService.create({
-            title, content, categoryIds });
+            title, content, categoryIds, userId });
 
             if (message) return res.status(code).json({ message });
 
@@ -35,6 +35,22 @@ const postController = {
             if (message) return res.status(code).json({ message });
 
             return res.status(code).json(post);
+        } catch (error) {
+            return res.status(500).json({ message: 'Erro Interno' });
+        }
+    },
+
+    update: async (req, res) => {
+        const { title, content } = req.body;
+        const { id } = req.params;
+        const { id: userId } = req.user;
+
+        try {
+            const { code, message, update } = await postService.update(id, userId, title, content);
+        
+            if (message) return res.status(code).json({ message });
+
+            return res.status(code).json(update);
         } catch (error) {
             return res.status(500).json({ message: 'Erro Interno' });
         }
