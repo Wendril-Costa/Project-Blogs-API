@@ -1,14 +1,5 @@
 const { BlogPost, PostCategory, Category, User, sequelize } = require('../database/models');
 
-// const getName = async (displayName) => {
-//     const userDisplayName = await User.findOne({
-//       where: { displayName },
-//     });
-  
-//     const { id } = userDisplayName;
-//     return id;
-//   };
-
 const postService = {
     getUser: async (email) => {
         const userId = await User.findOne({ where: { email } });
