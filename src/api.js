@@ -24,6 +24,8 @@ app.get('/post', jwtService.validateToken, postController.findAll);
 app.get('/post/:id', jwtService.validateToken, postController.findOne);
 app.put('/post/:id', jwtService.validateToken, postController.update);
 app.delete('/post/:id', jwtService.validateToken, postController.delPost);
+app.delete('/user/me', jwtService.validateToken, userController.delUser);
+// app.get('/post/search', jwtService.validateToken, postController.search);
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
 module.exports = app;

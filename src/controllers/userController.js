@@ -38,10 +38,15 @@ const userController = {
       
           return res.status(code).json(user);
         } catch (error) {
-          console.log(error.message);
-      
           return res.status(500).json({ message: 'Erro Interno' });
         }
+    },
+
+    delUser: async (req, res) => {
+      const { email } = req.user;
+    // console.log(user);
+    await userService.delUser({ email });
+    return res.status(204).end();
     },
 };
 

@@ -12,8 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       content: DataTypes.STRING,
       userId: {
         type: DataTypes.INTEGER,
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE",
+        foreignKey: true,
       },
       published: DataTypes.DATE,
       updated: DataTypes.DATE,
@@ -21,14 +20,19 @@ module.exports = (sequelize, DataTypes) => {
     {
       createdAt: 'published',
       updatedAt: 'updated',
+      tableName: 'BlogPosts',
     }
   );
 
   BlogPost.associate = (models) => {
     BlogPost.belongsTo(models.User, {
-      foreignKey: "userId",
-      as: "user",
+      foreignKey: 'userId',
+      as: 'user',
     });
+    BlogPost.belongsToMany(models.Category, {
+      through: 'PostCategory',
+      foreignKey: 'postId',
+    })
   };
 
   return BlogPost;

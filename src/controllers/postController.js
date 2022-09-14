@@ -1,9 +1,9 @@
+// const jwt = require('jsonwebtoken');
 const { postService } = require('../services/postService');
 
 const erro = { message: 'Erro Interno' };
 
 const postController = {
-    // error: () => { 'Erro Interno'; },
     create: async (req, res) => {
         const { title, content, categoryIds } = req.body;
         const { id: userId } = req.user;
@@ -73,6 +73,18 @@ const postController = {
             return res.status(500).json(erro);
         }
     },
+
+    // search: async (req, res) => {
+    //     const { q } = req.query;
+      
+    //     try {
+    //       const posts = await postService.search(q);
+      
+    //       return res.status(200).json(posts);
+    //     } catch (error) {
+    //       return res.status(500).json(erro);
+    //   }
+    // },
 };
 
 module.exports = {

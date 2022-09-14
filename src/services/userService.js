@@ -26,6 +26,20 @@ const userService = {
       
         return { code: 200, user };
     },
+
+    getUser: async (email) => {
+        const userId = await User.findOne({ where: { email } });
+        // console.log(userId);
+        const { id } = userId;
+        return id;
+      },
+
+    delUser: async ({ email }) => {
+        const userId = await userService.getUser(email);
+    const id = userId;
+    const deleteUser = await User.destroy({ where: { id } });
+    return deleteUser;
+      },
 };
 
 module.exports = {

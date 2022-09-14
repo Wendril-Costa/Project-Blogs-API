@@ -9,8 +9,11 @@ module.exports = {
           model: 'BlogPosts',
           key: 'id'
         },
+        onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         primaryKey: true,
+        foreingKey:true,
+        allowNull: false,
       },
       categoryId: {
         type: Sequelize.INTEGER,
@@ -18,8 +21,10 @@ module.exports = {
           model: 'Categories',
           key: 'id',
         },
+        onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         primaryKey: true,
+        allowNull: false,
       }
     });
   },
